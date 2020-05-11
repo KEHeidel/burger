@@ -1,0 +1,28 @@
+html {
+    background-color: orange;
+}
+
+h1 {
+    text-align: center;
+}
+
+h4 {
+    text-indent: 50px;
+    margin-top: 50px;
+}
+
+#name {
+    width: 500px;
+}
+
+.container {
+    width: 750px;
+    text-align: center;
+    margin-top: 50px;
+}
+
+button {
+    border-radius: 8px;
+    font-size: 16px;
+    background-color: greenyellow;
+}
