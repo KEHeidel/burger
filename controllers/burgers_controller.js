@@ -5,7 +5,9 @@ var burger = require("../models/burger.js");
 
 router.get("/", function(req, res){
     burger.selectAll(function(data){
+        console.log("data: ", data); 
         dataToDisplay = data.slice(Math.max(data.length - 10));
+        console.log("dataToDisplay: ", dataToDisplay);
         res.render("index", {burgers: dataToDisplay});
     });
 });
