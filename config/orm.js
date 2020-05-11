@@ -13,9 +13,8 @@ var orm = {
     selectAll: function(tableName, cb) {
         var queryString = `SELECT * FROM ${tableName};`;
         pool.getConnection(function(err, connection) {
-            if (err) throw err; // not connected!
+            if (err) throw err;
           
-            // Use the connection
             connection.query(queryString, function(error, result){
                 if (error) {
                     console.log('error: ', error);
@@ -31,9 +30,8 @@ var orm = {
     insertOne: function (tableName, colName, colVal, cb) {
         var queryString = `INSERT INTO ${tableName} (${colName}) VALUES ('${colVal}');`;
         pool.getConnection(function(err, connection) {
-            if (err) throw err; // not connected!
+            if (err) throw err;
           
-            // Use the connection
             connection.query(queryString, function(error, result){
                 if (error) {
                     console.log('error: ', error);
@@ -44,21 +42,12 @@ var orm = {
             });
            
           });
-        // connection.query(queryString, function(err, result){
-        //     if (err) {
-        //         console.log('error: ', err);
-        //         throw err;
-        //     }
-        //     cb(result);
-        // });
     },
     updateOne: function (tableName, colObj, condition, cb) {
-        //var queryString = `UPDATE ${tableName} SET ${colVal}=${boolean} WHERE ${colName}=${condition}`;
         var queryString = `UPDATE ${tableName} SET ${objToFormat(colObj)} WHERE ${condition};`
         pool.getConnection(function(err, connection) {
-            if (err) throw err; // not connected!
+            if (err) throw err;
           
-            // Use the connection
             connection.query(queryString, function(error, result){
                 if (error) {
                     console.log('error: ', error);
@@ -69,13 +58,6 @@ var orm = {
             });
            
           });
-        // connection.query(queryString, function(err, result){
-        //     if (err) {
-        //         console.log('error: ', err);
-        //         throw err;
-        //     }
-        //     cb(result);
-        // });
     }
 }
 

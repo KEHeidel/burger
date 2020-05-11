@@ -8,12 +8,4 @@ var pool = mysql.createPool({
     database: "heroku_f202b1627ae847a"
 });
 
-// connection.connect(function(err) {
-//     if (err) {
-//         console.log("error connecting: " + err.stack);
-//         return;
-//     }
-//     console.log("connected as id: " + connection.threadId);
-// });
-
 module.exports = pool;
