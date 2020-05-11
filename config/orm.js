@@ -14,6 +14,7 @@ var orm = {
         var queryString = `SELECT * FROM ${tableName};`;
         connection.query(queryString, function(err, result){
             if (err) {
+                console.log('error: ', err);
                 throw err;
             }
             cb(result);
@@ -23,6 +24,7 @@ var orm = {
         var queryString = `INSERT INTO ${tableName} (${colName}) VALUES ('${colVal}');`;
         connection.query(queryString, function(err, result){
             if (err) {
+                console.log('error: ', err);
                 throw err;
             }
             cb(result);
@@ -33,6 +35,7 @@ var orm = {
         var queryString = `UPDATE ${tableName} SET ${objToFormat(colObj)} WHERE ${condition};`
         connection.query(queryString, function(err, result){
             if (err) {
+                console.log('error: ', err);
                 throw err;
             }
             cb(result);
