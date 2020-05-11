@@ -1,4 +1,4 @@
-var connection = require("../config/connection.js");
+var pool = require("../config/connection.js");
 function objToFormat(ob) {
 	var arr = [];
 
@@ -12,34 +12,70 @@ function objToFormat(ob) {
 var orm = {
     selectAll: function(tableName, cb) {
         var queryString = `SELECT * FROM ${tableName};`;
-        connection.query(queryString, function(err, result){
-            if (err) {
-                console.log('error: ', err);
-                throw err;
-            }
-            cb(result);
-        });
+        pool.getConnection(function(err, connection) {
+            if (err) throw err; // not connected!
+          
+            // Use the connection
+            connection.query(queryString, function(error, result){
+                if (error) {
+                    console.log('error: ', error);
+                    throw error;
+                }
+                connection.release();
+                cb(result);
+            });
+           
+          });
+       
     },
     insertOne: function (tableName, colName, colVal, cb) {
         var queryString = `INSERT INTO ${tableName} (${colName}) VALUES ('${colVal}');`;
-        connection.query(queryString, function(err, result){
-            if (err) {
-                console.log('error: ', err);
-                throw err;
-            }
-            cb(result);
-        });
+        pool.getConnection(function(err, connection) {
+            if (err) throw err; // not connected!
+          
+            // Use the connection
+            connection.query(queryString, function(error, result){
+                if (error) {
+                    console.log('error: ', error);
+                    throw error;
+                }
+                connection.release();
+                cb(result);
+            });
+           
+          });
+        // connection.query(queryString, function(err, result){
+        //     if (err) {
+        //         console.log('error: ', err);
+        //         throw err;
+        //     }
+        //     cb(result);
+        // });
     },
     updateOne: function (tableName, colObj, condition, cb) {
         //var queryString = `UPDATE ${tableName} SET ${colVal}=${boolean} WHERE ${colName}=${condition}`;
         var queryString = `UPDATE ${tableName} SET ${objToFormat(colObj)} WHERE ${condition};`
-        connection.query(queryString, function(err, result){
-            if (err) {
-                console.log('error: ', err);
-                throw err;
-            }
-            cb(result);
-        });
+        pool.getConnection(function(err, connection) {
+            if (err) throw err; // not connected!
+          
+            // Use the connection
+            connection.query(queryString, function(error, result){
+                if (error) {
+                    console.log('error: ', error);
+                    throw error;
+                }
+                connection.release();
+                cb(result);
+            });
+           
+          });
+        // connection.query(queryString, function(err, result){
+        //     if (err) {
+        //         console.log('error: ', err);
+        //         throw err;
+        //     }
+        //     cb(result);
+        // });
     }
 }
 
